@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <h1>{{ user.get_full_name }}</h1>
+    {% with total_f=user.followers.count %}
+        <span class="total">
+        ПодписчикиЖ: {{ total_f }}
+            </span>
+<span class="count">
+<a data-id='{{ user.id }}' class="follow" href="#" data-action="{% if request.user in user.followers.all %}un{% endif %}follow">
+    {% if request.user not in user.followers.all %}
+        Follow
+    {% else %}
+        Unfollow
+    {% endif %}
+
+</a>
+</span>
+
+    {% if request.user not in user.followers.all %}
+        <a class="follow" href="{% url 'account:user_detail2' user 1  %}">Follow</a>
+    {% else %}
+        <a class="follow" href="{% url 'account:user_detail2' user 0 %}">Unfollow</a>
+    {% endif %}
+
+
+{% endwith %}
+{% endblock %}
+
+
+{% block domready %}
+    $('a.follow').click(function(e) {
+        e.preventDefault();
+        $.post('{% url "account:user_follow" %}',
+    {
+        id : $(this).data('id'),
+        action : $(this).data('action')
+},
+function(data) {
+    if (data['status'] == 'ok') {
+    var previous_action = $('a.follow').data('action');
+
+    $('a.follow').data('action',
+                        previous_action == 'follow' ? 'unfollow' : 'follow');
+    $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow');
+
+    var previous_followers = parseInt(
+        $('span.count .total').text());
+        $('span.count .total').text(
+            previous_action == 'follow' ? previous_followers + 1 :
+                previous_followers - 1
+            );
+        }
+    });
+    });
+
+{% endblock %}

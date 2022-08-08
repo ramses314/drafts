@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'images/css/images.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+  <div class="post">
+    <div class="post__left">
+
+        <div class="post_img">
+          <img src="{{ request.GET.url }}" >
+        </div>
+
+    </div>
+    <div class="post__right">
+            <h1>Добавь пост</h1>
+          <div class="post_form">
+
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for i in form %}
+                  <div class="post__input">
+                    {{ i }}
+                  </div>
+                {% endfor %}
+                <div class="post__button">
+                    <input type="submit" value="Опубликовать">
+                </div>
+            </form>
+
+         </div>
+
+    </div>
+  </div>
+
+
+{% endblock %}

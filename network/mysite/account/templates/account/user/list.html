@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Пользователи</h1>
+
+  {% for i in users %}
+
+    <div class="user">
+        <div class="container">
+            <div class="user__list">
+                <div class="user__photo">
+                    {% if  i.profile.photo %}
+                        <img src="{{ i.profile.photo.url}}" alt="">
+                    {% endif %}
+                    <span class="user__name">
+                        <a href="{% url 'account:user_detail' i %}">{{ i.get_full_name }}</a>
+                    </span>
+                </div>      
+            </div> 
+        </div>
+    </div>
+  {% endfor %}
+{% endblock %}

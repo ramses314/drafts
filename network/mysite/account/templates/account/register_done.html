@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="reset_done">
+    <img width='40px' src="{% static 'account/img/gal.png' %}" alt="">
+    Регистрация завершена! Можете войти в <a href="{% url 'account:login' %}">профиль</a>
+</div>
+
+{% endblock %}
