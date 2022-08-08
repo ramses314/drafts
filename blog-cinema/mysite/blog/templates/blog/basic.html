@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/detail.css' %}">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<link rel="icon" href="{% static 'blog/img/log.jpg' %}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="allsite">
+
+			<div class="banner">
+				<div class="banner__image">
+					<img src='{% static "blog/img/banner.png" %}' alt="">
+				</div>
+			</div>
+
+			<div class="navbar">
+				<div class="container">
+					<div class="navbar__items">
+						<!-- <div class="navbar__search">
+							<input type="text" class="search" placeholder=" Поиск">
+						</div> -->
+						<div class="navbar__search">
+									<form action="." method="get">
+								     	 {% for i in search_form %}
+									        {{ i.errors }}
+									        <span class="search">
+									        	{{i}}
+									        </span>
+									       <span class="navbar__button">
+									       		<input type="submit" value="Искать">
+									       </span>
+									     {% endfor %}
+									         
+									</form>
+								</div>
+						<div class="navbar__navigation">
+							<div class="navbar__navigation-block">
+								<!-- <a href="{% url 'blog:search' %}" class="navbar__item">Поиск</a> -->
+								<a href="{% url 'blog:index' %}" class="navbar__item">Главная</a>
+								<a href="{% url 'blog:about' %}" class="navbar__item">О нас</a>
+								<a href="{% url 'blog:index' %}" class="navbar__item">Что на ютубе?</a>
+							</div>
+						</div>
+					<!-- 	<div class="navbar__links">
+							<div class="navbar__links-block">
+								<a class="logonet" href="https://www.youtube.com">
+									<img src="{% static 'blog/img/net1.png' %}" alt="">
+								</a>
+								<a class="logonet" href="https://www.snapchat.com/ru-RU">
+									<img  src="{% static 'blog/img/net2.png' %}" alt="">
+								</a>
+								<a class="logonet" href="http://www.youtube.com/">
+									<img  src="{% static 'blog/img/net3.png' %}" alt="">
+								</a>
+								<a class="logonet" href="http://www.youtube.com/">
+									<img src="{% static 'blog/img/net4.png' %}" alt="">
+								</a>
+								<a class="logonet" href="http://www.youtube.com/">
+									<img  src="{% static 'blog/img/net5.png' %}" alt="">
+								</a>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+			
+			<div class="content">
+				<div class="container">
+					<div class="content__block">
+						<div class="content__column3">
+							<div class=""></div>
+							{% block tags %}{% endblock %}
+						</div>
+						<div class="content__column2">
+	                        {% block content %}{% endblock %}
+						</div>
+						<div class="content__column1">
+	                        {% block preview %}{% endblock %}   
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<div class="be_friends">
+						<div class="navbar__links">
+							<div class="navbar__links-block">
+								<div class="friend_text">Будем друзьями?</div>
+								<a class="logonet" href="https://www.youtube.com">
+									<img src="{% static 'blog/img/net1.png' %}" alt="">
+								</a>
+								<a class="logonet" href="https://www.snapchat.com/ru-RU">
+									<img  src="{% static 'blog/img/net2.png' %}" alt="">
+								</a>
+								<!-- <a class="logonet" href="http://www.youtube.com/">
+									<img  src="{% static 'blog/img/net3.png' %}" alt="">
+								</a> -->
+								<a class="logonet" href="http://www.youtube.com/">
+									<img src="{% static 'blog/img/net4.png' %}" alt="">
+								</a>
+								<a class="logonet" href="http://www.youtube.com/">
+									<img  src="{% static 'blog/img/net5.png' %}" alt="">
+								</a>
+							</div>
+						</div>
+			</div>
+
+			<div class="footer">
+				<div class="container">
+					<img src="img/11.png" width="60px" alt="">
+					<div>The Quentin Tarantino Archives © 1999-2022 except audiovisual content property of respective copyright holders. We're not affiliated with Mr. Tarantino or any company.</div>
+					<div>
+					Powered by  - Designed with the Hueman theme</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

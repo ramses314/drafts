@@ -1,0 +1,109 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %}Статья{% endblock %}
+
+{% block content %}
+
+        <div class="detail">
+            <div class="detail__tags">
+                <p>Теги {% for i in post.tags.all %}
+                    {% with i.slug as tag_slug %}
+
+                    #<a href="{% url 'blog:indextag' i.slug as tag_slug %}">{{ i.name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                    {% endwith %}
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="detail__date">
+                Опубликовано: {{ post.publish }}
+            </div>
+            <div class="detail__img">
+                    <img src="{{ post.photo.url }}" alt="">
+            </div>
+            <div class="detail__title">
+                {{ post.title }}
+            </div>
+            <div class="detail__text">
+                {{ post.body }}
+            </div>
+           <!--  <div class="">
+                <a href="#" class="preview__header">Поделиться</a>
+            </div> -->
+        </div>
+
+
+
+<!-- Комментарии -->
+
+        <div class="comments">
+            {% with comments.count as total %}
+                <h2 class="comments__total">Всего {{ total }} комментариев</h2>
+            {% endwith %}
+
+            <div class="comments__items">
+                {% for i in comments %}
+                    <div class="comments__item">
+                        <div class="comments__author">
+                            {{i.name }} {{ i.created }}
+                        </div>
+                        <div class="comments__text">
+                            {{ i.body }}
+                        </div>
+                    </div>  
+                {% empty %}
+                    <h2>Комментариев нет</h2>
+                {% endfor %}
+            </div>
+            
+
+           <div class="comments__form">
+                {% if new_comment %}
+                    <h2>Комментарий добавлен</h2>
+                {% else %}
+                    <h2>Добавить комментарий:</h2>
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        {% for i in comment_form %}
+                            {{ i.errors }}
+                            <span class="comments__label">
+                                {{ i.label }}
+                            </span>
+                            <span class="comments__field">
+                                {{ i }}
+                            </span>
+                            <br>
+                        {% endfor %}
+                        <div class="comments__button">
+                            <input type="submit" value="Добавить">
+                        </div>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+         
+
+<!-- Рекомендации -->
+
+        <div class="recom">
+            <div class="recom__header">
+                <h1>Смотрите также:</h1>
+            </div>
+            <div class="recom__items">
+
+                {% for i in similar_posts %}
+
+                    <div class="recom__item">
+                         <div class="recom__img">
+                            <img src="{{ i.photo.url }}" alt="">
+                        </div>
+                        <div class="recom__title">
+                            <a href="#">{{ i.title }}</a>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div> 
+        </div>
+        
+{% endblock %}

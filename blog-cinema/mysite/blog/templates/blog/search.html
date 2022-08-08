@@ -1,0 +1,69 @@
+{% extends 'blog/basic.html' %}
+
+{% block title %}Поиск{% endblock %}
+
+
+
+{% block tags %}
+
+<div class="iop">
+        {% for i in tags %}
+        {% with i.name as tagg %}
+            <a href= "{% url 'blog:index-tag' i.slug %}">#{{ i.name }}</a>
+        <br>
+        {% endwith %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+  <div class="seek">
+    <div class="seek__header">
+      Поиск по блогу
+    </div>
+      
+    <form action="." method="get">
+      {% for i in form %}
+        {{ i.errors }}
+          <span class="seek__label">
+            {{ i.label }}
+          </span>
+          <span class="seek__field">
+            {{ i }}
+          </span>  
+      {% endfor %}
+      <div class="seek_button">
+        <input type="submit" value="Поиск">
+      </div>
+    </form>
+
+
+    <div class="seek__answers">
+      {% if query %}
+        <h3>Найдено {{ results.count }} результатов c "{{query}}"</h3>
+        {% for i in results %}
+            <div class="seek__img">
+              <img src="{{ i.photo.url }}" alt="">
+          </div>  
+          <div class="seek__date">
+              {{ i.publish|date:'j F Y' }}
+          </div>
+          <div class="seek__title">
+              <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+          </div>
+          <div class="seek__text">
+              {{ i.body|truncatewords:20 }}    
+          </div>
+        {% empty %}
+          <h4>Нет результатов</h4>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div> 
+  {% endblock %}

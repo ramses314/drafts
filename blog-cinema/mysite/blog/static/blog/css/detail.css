@@ -1,0 +1,189 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus, :active {
+  outline: none;
+}
+
+a:focus, a:active {
+  outline: none;
+}
+
+nav, footer, header, aside {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+
+
+
+.detail {}
+
+.detail__tags {}
+.detail__img img {
+	max-width: 90%;
+	margin: 0 auto;
+}
+.detail__img {
+	
+}
+.detail__date {
+	font-weight: 700;
+}
+.detail__title {
+	font-size: 30px;
+	font-weight: 600;
+}
+.detail__text {
+	font-size: 18px;
+	border-bottom: 2px solid gray;
+}
+
+
+
+
+
+
+.comments {
+	padding: 10px;
+}
+
+
+.comments__total {}
+
+.comments__items {
+	padding: 30px;
+}
+.comments__item {}
+.comments__author {
+	background-color: #ebceda;
+	display: inline-block;
+}
+.comments__text {
+	background-color: #e0dedf;
+	min-height: 40px;
+	width: 50%;
+	padding: 15px;
+	margin: 0 0 15px 0;
+}
+
+
+
+
+
+.comments {}
+
+.comments__form {}
+
+.comments__label {}
+
+.comments__field{
+	margin: 5px 0;
+}
+.comments__field input, textarea{
+	background-color: #f0f0f0;
+	margin: 5px 0;
+}
+
+.comments__button input{
+	padding: 10px;
+	margin: 20px;
+}
+
+
+
+
+
+
+.recom {
+	background-color: #ff2681;
+	position: relative;
+	width: 100%;
+}
+
+.recom__header {
+	font-size: 30px;
+	color: white;
+	padding: 20px;
+}
+
+.recom__items {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.recom__item {}
+
+.recom__img{
+	max-width: 300px;
+	min-height: 200px;
+	position: relative;
+}
+
+.recom__img img {
+	width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+.recom__title {}
+

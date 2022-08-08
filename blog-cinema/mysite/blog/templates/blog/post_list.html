@@ -1,0 +1,85 @@
+{% extends 'blog/basic.html' %}
+
+
+
+
+{% block title %}Главная{% endblock %}
+
+
+
+
+{% block tags %}
+
+<div class="iop">
+        {% for i in tags %}
+        {% with i.name as tagg %}
+            <a href= "{% url 'blog:index-tag' i.slug %}">#{{ i.name }}</a>
+        <br>
+        {% endwith %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block preview %}
+
+    <h2 class="preview__header">Новинки</h2>
+
+    {% if tag %}
+        <h2>Посты по тегу {{ tag.name }}</h2>
+    {% endif %}
+
+     {% for i in posts %}
+        <div class="preview__img">
+            <img src="{{ i.photo.url }}" alt="">
+        </div>  
+        <div class="preview__date">
+            {{ i.publish|date:'j F Y' }}
+        </div>
+        <div class="preview__title">
+            <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+        </div>
+        <div class="preview__text">
+        
+            {{ i.body|truncatewords:20 }}
+            
+        </div>
+     {% endfor %}
+  
+{% endblock %}
+
+
+
+{% block content %}
+
+        <h2 class="preview__header">Следи за кино с нами</h2>
+
+        {% for i in posts %}
+            <div class="content__img">
+                    <img src="{{ i.photo.url }}" alt=""> 
+            </div>
+            <div class="content__date">
+                Опубликовано: {{ i.publish|date:'j F Y' }}
+            </div>
+            <div class="content__title">
+                <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>
+            </div>
+            <div class="content__text">
+                {{ i.body|truncatewords:25 }}
+            </div>    
+        {% endfor %}
+
+        <div class="jj">
+            {% if page_obj.has_previous %}
+            <a href="?page={{page_obj.previous_page_number}}">Предыдущаяя</a>
+            {% endif %}
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            {% if page_obj.has_next %}
+            <a href="?page={{page_obj.next_page_number}}">Cледующая</a>
+            {% endif %}
+        </div>
+
+{% endblock %}
