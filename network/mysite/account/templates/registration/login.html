@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>HTML теги-формы</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'account/css/login.css' %}">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="navbar">
+			<a href="#">main</a>
+		</div>
+		<div class="content">
+			<div class="content__items">
+				<div class="content__text">
+					<div class="content__title">
+						SIXTY PLUS
+					</div>
+					<div class="content__subtitle">
+						Sixty plus помогает вам быть всегда в движении.
+					</div>
+				</div>
+				<div class="content__login">
+
+                  {% if form.errors %}
+                    <p>{{ form.error }}</p>
+                  {% else %}
+                    <p></p>
+                  {% endif %}
+
+
+                  <form action="." method="post">
+                    {% csrf_token %}
+                    {% for i in form %}
+                      {{ i.errors }}
+					  <div class="loginput">
+						  {{ i }}
+					  </div>
+                    {% endfor %}
+                    <input type="hidden" name="text" value="{{ next }}" />
+                    <div class="content__button">
+						<input type="submit" value="Войти">
+					</div>
+                  </form>
+
+					<div class="passwordt">
+						<a class='passwordt' href="{% url 'account:password_reset' %}">Забыли пароль?</a>
+					</div>
+
+					<div class="content__reg">
+						<a href="{% url 'account:register' %}">Зарегистрироваться</a>
+					</div>
+					<div class="content__gogle">
+						<img src="{% static 'account/img/goo.png' %}" alt="">
+						<a href="{% url 'social:begin' 'google-oauth2' %}">Войти через google</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<a href="#">Правила</a>
+			<a href="#">О нас</a>
+			<a href="#">Для бизнеса</a>
+			<a href="#">Разработчикам</a>
+			<a href="#">Английский</a>
+		</div>
+	</div>
+
+</body>
+</html>
